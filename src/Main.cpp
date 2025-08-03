@@ -1,8 +1,14 @@
-#include <iostream>
-#include <SDL2/SDL.h>
+#include "Game.h"
 
-int main(){
-    // what we wznt to initialize from sdl like we can do mouse, keyboard or any hardware
-    SDL_Init(SDL_INIT_EVERYTHING);
+// argument counter and argument array value
+int main(int argc,char* argv[]){
+    
+    // Game loop with Game class
+    Game game;
+
+    game.Initialize();
+    game.Run();
+    game.Destroy();
+    
     return 0;
 }
