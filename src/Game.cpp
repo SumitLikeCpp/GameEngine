@@ -19,8 +19,9 @@ void Game::Initialize(){
 
     SDL_DisplayMode displayMode;
     SDL_GetCurrentDisplayMode(0,&displayMode);
-    windowWidth = displayMode.w;                // for width
-    windowHeight = displayMode.h;               // for height
+    // but in last full screen me hi 800 by 600 hi rahega
+    windowWidth = 800; //displayMode.w;                // for width
+    windowHeight = 600; //displayMode.h;               // for height
 
     // if all ok then we will create window in operating system
     window = SDL_CreateWindow(NULL,
