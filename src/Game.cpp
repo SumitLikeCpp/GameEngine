@@ -1,5 +1,6 @@
 #include "Game.h"
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 #include <iostream>
 
 Game::Game(){
@@ -67,18 +68,45 @@ void Game::ProcessInput(){
     }                
 }
 
+void Game::setup(){
+    // Initialixing game object like position colour ...
+
+
+}
+
 void Game::Update(){
 
 }
 
 void Game::Render(){
-    SDL_SetRenderDrawColor(renderer,255,0,0,255);
+    SDL_SetRenderDrawColor(renderer,21,21,21,255);              // background now gray
     SDL_RenderClear(renderer);
 
+    // // drawing a rectangle
+    // // from top x and y position it will start with width and height
+    // SDL_SetRenderDrawColor(renderer,255,255,255,255);
+    // SDL_Rect player = {10,10,20,20};
+    // SDL_RenderFillRect(renderer,&player);
+
+    // we need to Load a PNG texture now 
+    SDL_Surface* surface = IMG_Load("./assets/images/tank-tiger-right.png");                        // under this fucntion i have to put file path
+    SDL_Texture* texture = SDL_CreateTextureFromSurface(renderer,surface);
+    SDL_FreeSurface(surface);                                                                       // destroying the surface
+
+
+    // in rendercopy 3rd variable NULL is because for entire section now renderer
+    SDL_Rect dstRect = {10 , 10 , 32 , 32};                     // first 2 are positon from where rect is started and other two are width and height
+    SDL_RenderCopy(renderer,texture,NULL/*srcRect*/, &dstRect /*dstRect*/);
+
+    SDL_DestroyTexture(texture);
+    // we have 2 buffer front buffer and back buffer the front buffer is for showing the object other hand back 
+    // buffer is for rendering the object need to showing 
+    // to fix this glitch we need to use renderpresent function
     SDL_RenderPresent(renderer);
 }
 
 void Game::Run(){
+    setup();
     while(isRunning){
         ProcessInput();
         Update();

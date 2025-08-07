@@ -15,6 +15,7 @@ class Game{
         ~Game();                                          // its a destructor
         void Initialize();
         void Run();
+        void setup();
         void ProcessInput();
         void Update();
         void Render();
@@ -22,7 +23,6 @@ class Game{
 
         int windowWidth;
         int windowHeight;
-        
 
 };
 
