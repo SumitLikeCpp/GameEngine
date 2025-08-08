@@ -81,8 +81,16 @@ void Game::setup(){
 }
 
 void Game::Update(){
+    // // now limiting this update function to 60fps if we are too fast until we reach MILLISECS_PER_FRAME
+    // jab tak 60 frame complete nhi ho jaata chalte rahega
+    while(!SDL_TICKS_PASSED(SDL_GetTicks(),millisecsPreviousFrame + MILLISECS_PER_FRAME));
+
+    // store the current frame time
+    millisecsPreviousFrame = SDL_GetTicks();                // getticks is for current time
+
     playerPosition.x += playerVelocity.x;
     playerPosition.y += playerVelocity.y;
+
 }
 
 void Game::Render(){
