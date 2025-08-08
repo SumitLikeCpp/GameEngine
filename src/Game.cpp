@@ -1,6 +1,7 @@
 #include "Game.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <glm/glm.hpp>
 #include <iostream>
 
 Game::Game(){
@@ -68,14 +69,20 @@ void Game::ProcessInput(){
     }                
 }
 
+glm::vec2 playerPosition;
+glm::vec2 playerVelocity;
+
 void Game::setup(){
     // Initialixing game object like position colour ...
-
-
+    // playerPosition.x = 10.0;
+    // playerPosition,y = 20.0;
+    playerPosition = glm::vec2(10.0,20.0);
+    playerVelocity = glm::vec2(1.0,0.0);
 }
 
 void Game::Update(){
-
+    playerPosition.x += playerVelocity.x;
+    playerPosition.y += playerVelocity.y;
 }
 
 void Game::Render(){
@@ -95,7 +102,12 @@ void Game::Render(){
 
 
     // in rendercopy 3rd variable NULL is because for entire section now renderer
-    SDL_Rect dstRect = {10 , 10 , 32 , 32};                     // first 2 are positon from where rect is started and other two are width and height
+    SDL_Rect dstRect = {
+        static_cast<int> (playerPosition.x) , 
+        static_cast<int> (playerPosition.y) ,
+        32 , 
+        32
+    };                     // first 2 are positon from where rect is started and other two are width and height
     SDL_RenderCopy(renderer,texture,NULL/*srcRect*/, &dstRect /*dstRect*/);
 
     SDL_DestroyTexture(texture);
