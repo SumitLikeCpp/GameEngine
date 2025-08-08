@@ -83,7 +83,12 @@ void Game::setup(){
 void Game::Update(){
     // // now limiting this update function to 60fps if we are too fast until we reach MILLISECS_PER_FRAME
     // jab tak 60 frame complete nhi ho jaata chalte rahega
-    while(!SDL_TICKS_PASSED(SDL_GetTicks(),millisecsPreviousFrame + MILLISECS_PER_FRAME));
+    // what this line do it will use all the resourses in the CPU to fix this issue we can use SDL_DEALY function 
+    // what SDL_DELAY is suggesting if we dont want anything for sometime we dont need any resourse of computer 
+    // while(!SDL_TICKS_PASSED(SDL_GetTicks(),millisecsPreviousFrame + MILLISECS_PER_FRAME));
+    int timeToWait = MILLISECS_PER_FRAME - (SDL_GetTicks() - millisecsPreviousFrame);
+    if(timeToWait > 0 && timeToWait <= MILLISECS_PER_FRAME )
+        SDL_Delay(timeToWait);
 
     // store the current frame time
     millisecsPreviousFrame = SDL_GetTicks();                // getticks is for current time
